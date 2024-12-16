@@ -1,10 +1,10 @@
 /* Attention: Generate by code. Don't update by hand!!! */
 html[data-theme="light"] {
-  --color-components-input-bg-normal: #C8CEDA40;
+  --color-components-input-bg-normal: #FFFFFF; /*#C8CEDA40*/
   --color-components-input-text-placeholder: #98A2B2;
   --color-components-input-bg-hover: #C8CEDA24;
   --color-components-input-bg-active: #F9FAFB;
-  --color-components-input-border-active: #D0D5DC;
+  --color-components-input-border-active: #276FFA; /*#D0D5DC*/
   --color-components-input-border-destructive: #FDA29B;
   --color-components-input-text-filled: #101828;
   --color-components-input-bg-destructive: #FFFFFF;
