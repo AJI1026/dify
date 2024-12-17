@@ -24,10 +24,23 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
   const searchParams = useSearchParams()
   const [showPassword, setShowPassword] = useState(false)
   const emailFromLink = decodeURIComponent(searchParams.get('email') || '')
+  const mobileFromLink = decodeURIComponent(searchParams.get('mobile') || '')
+  const codeFromLink = decodeURIComponent(searchParams.get('code') || '')
+  const [code, setCode] = useState(codeFromLink)
+  const [mobile, setMobile] = useState(mobileFromLink)
   const [email, setEmail] = useState(emailFromLink)
   const [password, setPassword] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
+
+  // 使用 useState 来管理状态
+  const [num, setNum] = useState(1);
+
+  // 处理点击事件
+  const handleClick = (number: number) => {
+    setNum(number);
+  };
+
   const handleEmailPasswordLogin = async () => {
     if (!email) {
       Toast.notify({ type: 'error', message: t('login.error.emailEmpty') })
@@ -106,65 +119,127 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
    * 这里是邮箱+密码登录 => 手机号+验证码
    */
   return <form onSubmit={() => { }}>
-    <div className='mb-3'>
-      <label htmlFor="email" className="my-2 system-md-semibold text-text-secondary">
-        {t('login.email')}
-      </label>
-      <div className="mt-1">
-        <Input
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          disabled={isInvite}
-          id="email"
-          type="email"
-          autoComplete="email"
-          placeholder={t('login.emailPlaceholder') || ''}
-          tabIndex={1}
+
+    <div className="tab_con">
+
+      <div className="tab_btns">
+        <input
+          type='button'
+          className={`system-md-regular ${num === 1 ? 'active' : ''}`} 
+          value="手机号登录" 
+          onClick={() => handleClick(1)} 
+        />
+        <input
+          type='button'
+          className={`system-md-regular ${num === 2 ? 'active' : ''}`} 
+          value="账号登录" 
+          onClick={() => handleClick(2)} 
         />
       </div>
-    </div>
 
-    <div className='mb-3'>
-      <label htmlFor="password" className="my-2 flex items-center justify-between">
-        <span className='system-md-semibold text-text-secondary'>{t('login.password')}</span>
-        <Link href={`/reset-password?${searchParams.toString()}`} className='system-xs-regular text-components-button-secondary-accent-text'>
-          {t('login.forget')}
-        </Link>
-      </label>
-      <div className="relative mt-1">
-        <Input
-          id="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter')
-              handleEmailPasswordLogin()
-          }}
-          type={showPassword ? 'text' : 'password'}
-          autoComplete="current-password"
-          placeholder={t('login.passwordPlaceholder') || ''}
-          tabIndex={2}
-        />
-        <div className="absolute inset-y-0 right-0 flex items-center">
-          <Button
-            type="button"
-            variant='ghost'
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? '👀' : '😝'}
-          </Button>
-        </div>
-      </div>
-    </div>
+      {
+        num === 1 && (
+          <>
+            {/* 邮箱 */}
+            {/* <div className='mb-3'>
+              <label htmlFor="email" className="my-2 system-md-semibold text-text-secondary">
+                {t('login.email')}
+              </label>
+              <div className="mt-1">
+                <Input
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  disabled={isInvite}
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder={t('login.emailPlaceholder') || ''}
+                  tabIndex={1}
+                />
+              </div>
+            </div> */}
+            <div className='mb-3'>
+              <div className="mt-1">
+                <Input
+                  id='mobile'
+                  className='border-grey'
+                  value={mobile}
+                  onChange={e => setMobile(e.target.value)}
+                  disabled={isInvite}
+                  type="mobile"
+                  autoComplete="mobile"
+                  placeholder={t('login.mobilePlaceholder') || ''}
+                  tabIndex={1}
+                />
+              </div>
+            </div>
+            {/* 验证码 */}
+            <div className='mb-3'>
+              {/* <label htmlFor="password" className="my-2 flex items-center justify-between">
+                <span className='system-md-semibold text-text-secondary'>{t('login.password')}</span>
+                <Link href={`/reset-password?${searchParams.toString()}`} className='system-xs-regular text-components-button-secondary-accent-text'>
+                  {t('login.forget')}
+                </Link>
+              </label> */}
+              <div className="codeBox relative mt-1">
+                {/* <Input
+                  id="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter')
+                      handleEmailPasswordLogin()
+                  }}
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  placeholder={t('login.passwordPlaceholder') || ''}
+                  tabIndex={2}
+                /> */}
+                <Input
+                  id='code'
+                  className='border-grey'
+                  value={code}
+                  onChange={e => setCode(e.target.value)}
+                  placeholder={t('login.codePlaceholder') || ''}
+                  tabIndex={2}
+                />
+                <div className="divide absolute"></div>
+                <div className="absolute inset-y-0 right-2 flex items-center system-md-regular login-btn">
+                  获取验证码
+                </div>
+                {/* <div className="absolute inset-y-0 right-0 flex items-center">
+                  <Button
+                    type="button"
+                    variant='ghost'
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? '👀' : '😝'}
+                  </Button>
+                </div> */}
+              </div>
+            </div>
+            {/* 登录按钮 */}
+            <div className='mb-2'>
+              <Button
+                tabIndex={2}
+                variant='primary'
+                onClick={handleEmailPasswordLogin}
+                disabled={isLoading || !email || !password}
+                className="w-full"
+              >{t('login.signBtn')}</Button>
+            </div>
+          </>
+        )
+      }
 
-    <div className='mb-2'>
-      <Button
-        tabIndex={2}
-        variant='primary'
-        onClick={handleEmailPasswordLogin}
-        disabled={isLoading || !email || !password}
-        className="w-full"
-      >{t('login.signBtn')}</Button>
+      {
+        num === 2 && (
+          <div className='mb-3'>
+            账号登录
+          </div>
+        )
+      }
+
     </div>
   </form>
 }

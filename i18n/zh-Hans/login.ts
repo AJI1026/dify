@@ -1,8 +1,13 @@
+
 const translation = {
   pageTitle: '蜀灵智能体开发引擎',
   welcome: '👋 欢迎来到 Dify, 登录以继续',
   email: '邮箱',
   emailPlaceholder: '输入邮箱地址',
+  mobile: '手机号',
+  mobilePlaceholder: '输入手机号',
+  code: '验证码',
+  codePlaceholder: '输入验证码',
   password: '密码',
   passwordPlaceholder: '输入密码',
   name: '用户名',
