@@ -24,12 +24,15 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
   const searchParams = useSearchParams()
   const [showPassword, setShowPassword] = useState(false)
   const emailFromLink = decodeURIComponent(searchParams.get('email') || '')
+  const accountFromLink = decodeURIComponent(searchParams.get('account') || '')
   const mobileFromLink = decodeURIComponent(searchParams.get('mobile') || '')
   const codeFromLink = decodeURIComponent(searchParams.get('code') || '')
+  const passwordFromLink = decodeURIComponent(searchParams.get('password') || '')
+  const [account, setAccount] = useState(accountFromLink)
   const [code, setCode] = useState(codeFromLink)
   const [mobile, setMobile] = useState(mobileFromLink)
   const [email, setEmail] = useState(emailFromLink)
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState(passwordFromLink)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -247,7 +250,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 tabIndex={2}
                 variant='primary'
                 onClick={handleEmailPasswordLogin}
-                disabled={isLoading || !email || !password}
+                // disabled={isLoading || !email || !password}
                 className="w-full input-resize"
               >{t('login.signBtn')}</Button>
             </div>
@@ -260,9 +263,45 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
 
       {
         num === 2 && (
-          <div className='mb-3'>
-            账号登录
-          </div>
+          <>
+            {/* 账号 */}
+            <div className='mb-3'>
+              <div className="mt-1">
+                <Input
+                  id='account'
+                  className='border-grey input-resize'
+                  value={account}
+                  type="account"
+                  autoComplete="account"
+                  placeholder={t('login.accountPlaceholder') || ''}
+                  tabIndex={2}
+                />
+              </div>
+            </div>
+            {/* 密码 */}
+            <div className='mb-3'>
+              <div className="mt-1">
+                <Input
+                  id='password'
+                  className='border-grey input-resize'
+                  value={password}
+                  type="password"
+                  autoComplete="password"
+                  placeholder={t('login.passwordPlaceholder') || ''}
+                  tabIndex={2}
+                />
+              </div>
+            </div>
+            {/* 登录按钮 */}
+            <div className='mb-2 mt-20'>
+              <Button
+                tabIndex={2}
+                variant='primary'
+                // disabled={isLoading || !email || !password}
+                className="w-full input-resize"
+              >{t('login.signBtn')}</Button>
+            </div>
+          </>
         )
       }
 

@@ -38,11 +38,20 @@ export default async function SignInLayout({ children }: any) {
         {/* <Header /> */}
         <div className={
           cn(
-            'flex flex-col items-center w-full grow justify-center',
+            'flex flex-row items-center w-full grow justify-center',
             'px-6',
-            'md:px-[108px]',
+            // 'md:px-[108px]',
           )
         }>
+          {/* 登录页左边部分 */}
+          <div className='w-full mx-auto mr-4 login-left flex flex-col justify-center align-center'>
+            <div className='system-md-regular mb-6'>扫码登录</div>
+            <div className='qr-code'>
+              <img src="" alt="" />
+            </div>
+            <div className='system-md-regular mt-6'>使用微信APP扫码登录</div>
+          </div>
+          {/* 登录页右边部分 */}
           <div className='flex flex-col md:w-[400px]'>
             {children}
           </div>

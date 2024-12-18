@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -86,7 +86,9 @@ const NormalForm = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-row items-center w-full grow justify-center">
+
+      {/* 登录页右边部分 */}
       <div className="w-full mx-auto mt-8">
         {isInviteLink
           ? <div className="w-full mx-auto">
@@ -175,7 +177,7 @@ const NormalForm = () => {
 
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
