@@ -10,3 +10,8 @@
   background-image: url('./assets/background.png');
   background-size: cover;
 }
+
+.title {
+  background-image: url('./assets/title.png');
+  background-size: cover;
+}

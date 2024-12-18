@@ -9,6 +9,7 @@ import MailAndPasswordAuth from './components/mail-and-password-auth'
 import SocialAuth from './components/social-auth'
 import SSOAuth from './components/sso-auth'
 import cn from '@/utils/classnames'
+import style from '../signin/page.module.css'
 import { getSystemFeatures, invitationCheck } from '@/service/common'
 import { defaultSystemFeatures } from '@/types/feature'
 import Toast from '@/app/components/base/toast'
@@ -92,8 +93,12 @@ const NormalForm = () => {
             <h2 className="title-4xl-semi-bold text-text-primary">{t('login.join')}{workspaceName}</h2>
             <p className='mt-2 body-md-regular text-text-tertiary'>{t('login.joinTipStart')}{workspaceName}{t('login.joinTipEnd')}</p>
           </div>
-          : <div className="w-full mx-auto">
-            <h2 className="title-4xl-semi-bold text-text-primary">{t('login.pageTitle')}</h2>
+          : <div className="w-full mx-auto flex justify-center">
+            {/* <h2 className="title-4xl-semi-bold text-text-primary">{t('login.pageTitle')}</h2> 这里文字标题改成图片*/}
+            <div className={cn(
+              style.title,
+              'title-img',
+            )}/>
             {/* <p className='mt-2 body-md-regular text-text-tertiary'>{t('login.welcome')}</p> */}
           </div>}
         <div className="bg-white">
@@ -114,6 +119,8 @@ const NormalForm = () => {
           </div>}
           {
             (systemFeatures.enable_email_code_login || systemFeatures.enable_email_password_login) && <>
+
+              {/* dify原邮箱登录，现在改成手机号登录 */}
               {systemFeatures.enable_email_code_login && authType === 'code' && <>
                 <MailAndCodeAuth isInvite={isInviteLink} />
                 {systemFeatures.enable_email_password_login && <div className='cursor-pointer py-1 text-center' onClick={() => { updateAuthType('password') }}>
@@ -142,7 +149,7 @@ const NormalForm = () => {
               </div>
             </div>
           </>}
-          <div className="w-full block mt-2 system-xs-regular text-text-tertiary">
+          {/* <div className="w-full block mt-2 system-xs-regular text-text-tertiary">
             {t('login.tosDesc')}
             &nbsp;
             <Link
@@ -164,7 +171,7 @@ const NormalForm = () => {
               className='system-xs-medium text-text-secondary hover:underline'
               href='/install'
             >{t('login.setAdminAccount')}</Link>
-          </div>}
+          </div>} */}
 
         </div>
       </div>

@@ -162,7 +162,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
               <div className="mt-1">
                 <Input
                   id='mobile'
-                  className='border-grey'
+                  className='border-grey input-resize'
                   value={mobile}
                   onChange={e => setMobile(e.target.value)}
                   disabled={isInvite}
@@ -197,7 +197,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 /> */}
                 <Input
                   id='code'
-                  className='border-grey'
+                  className='border-grey input-resize'
                   value={code}
                   onChange={e => setCode(e.target.value)}
                   placeholder={t('login.codePlaceholder') || ''}
@@ -218,6 +218,29 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 </div> */}
               </div>
             </div>
+
+            {/* 协议 */}
+            <div className="w-full mt-16 mb-8 system-xs-regular flex flex-row justify-center items-center">
+              <input 
+                className='mr-2'
+                type="checkbox"
+                onChange={(e) => console.log(e.target.checked)} 
+              />
+              {t('login.tosDesc')}
+              &nbsp;
+              <Link
+                className='link-color system-xs-medium text-text-secondary hover:underline' // 这里可以用样式表中的text-accent
+                target='_blank' rel='noopener noreferrer'
+                href='https://dify.ai/terms'
+              >《 {t('login.tos')} 》</Link>
+              &nbsp;和&nbsp;
+              <Link
+                className='link-color system-xs-medium text-text-secondary hover:underline'
+                target='_blank' rel='noopener noreferrer'
+                href='https://dify.ai/privacy'
+              >《 {t('login.pp')} 》</Link>
+            </div>
+
             {/* 登录按钮 */}
             <div className='mb-2'>
               <Button
@@ -225,9 +248,12 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 variant='primary'
                 onClick={handleEmailPasswordLogin}
                 disabled={isLoading || !email || !password}
-                className="w-full"
+                className="w-full input-resize"
               >{t('login.signBtn')}</Button>
             </div>
+
+            {/* tip */}
+            <div className='system-xs-medium mt-4 text-text-tertiary'>登录即自动创建账号</div>
           </>
         )
       }

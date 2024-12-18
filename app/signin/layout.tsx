@@ -25,15 +25,17 @@ export default async function SignInLayout({ children }: any) {
       'flex w-full min-h-screen',
       'sm:p-4 lg:p-8',
       'gap-x-20',
-      'justify-center lg:justify-start',
+      'justify-center lg:justify-center', // 水平居中
+      'align-center', // 垂直居中
     )}>
       <div className={
         cn(
-          'flex w-full flex-col bg-white shadow rounded-2xl shrink-0',
+          'flex flex-col bg-white shadow rounded-2xl shrink-0', // 去掉w-full
           'space-between',
+          'login-size', // 重新调整登录框宽度、高度
         )
       }>
-        <Header />
+        {/* <Header /> */}
         <div className={
           cn(
             'flex flex-col items-center w-full grow justify-center',
@@ -45,9 +47,9 @@ export default async function SignInLayout({ children }: any) {
             {children}
           </div>
         </div>
-        <div className='px-8 py-6 system-xs-regular text-text-tertiary'>
+        {/* <div className='px-8 py-6 system-xs-regular text-text-tertiary'>
           © {new Date().getFullYear()} LangGenius, Inc. All rights reserved.
-        </div>
+        </div> */}
       </div>
     </div>
   </>
