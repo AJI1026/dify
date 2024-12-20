@@ -36,6 +36,15 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
 
   const [isLoading, setIsLoading] = useState(false)
 
+  const [selectedCode, setSelectedCode] = useState('+86'); // 默认区号
+
+  const countryCodes = [
+    { name: '中国', code: '+86' },
+    { name: '美国', code: '+1' },
+    { name: '英国', code: '+44' },
+    // 可以添加更多国家和区号
+  ];
+
   // 使用 useState 来管理状态
   const [num, setNum] = useState(1);
 
@@ -125,19 +134,27 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
 
     <div className="tab_con">
 
-      <div className="tab_btns">
-        <input
-          type='button'
-          className={`system-md-regular ${num === 1 ? 'active' : ''}`} 
-          value="手机号登录" 
-          onClick={() => handleClick(1)} 
-        />
-        <input
-          type='button'
-          className={`system-md-regular ${num === 2 ? 'active' : ''}`} 
-          value="账号登录" 
-          onClick={() => handleClick(2)} 
-        />
+      <div className="tab_btns mb-8">
+        {/* 手机号登录按钮 */}
+        <div className='relative'>
+          <input
+            type='button'
+            className={`system-md-regular ${num === 1 ? 'active' : ''}`} 
+            value="手机号登录" 
+            onClick={() => handleClick(1)} 
+          />
+          {num === 1 && <div className='underline'></div>}
+        </div>
+        {/* 账号登录按钮 */}
+        <div className='relative'>
+          <input
+            type='button'
+            className={`system-md-regular ${num === 2 ? 'active' : ''}`} 
+            value="账号登录" 
+            onClick={() => handleClick(2)} 
+          />
+          {num === 2 && <div className='underline'></div>}
+        </div>
       </div>
 
       {
@@ -162,11 +179,25 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
               </div>
             </div> */}
             <div className='mb-3'>
-              <div className="mt-1">
+              <div className="mt-1 mobile-input">
+                {/* 手机输入框前的区号选择 */}
+                <select
+                  value={selectedCode}
+                  onChange={e => setSelectedCode(e.target.value)}
+                  className='system-md-regular text-components-input-text-placeholder mr-2 suffix-select'
+                  disabled={isInvite}
+                >
+                  {countryCodes.map((country, index) => (
+                    <option key={index} value={country.code}>
+                      {country.code}
+                    </option>
+                  ))}
+                </select>
+                <div className='suffix'></div>
                 <Input
                   id='mobile'
-                  className='border-grey input-resize'
-                  value={mobile}
+                  className='border-grey input-resize pl-20'
+                  // value={mobile}
                   onChange={e => setMobile(e.target.value)}
                   disabled={isInvite}
                   type="mobile"
@@ -201,7 +232,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 <Input
                   id='code'
                   className='border-grey input-resize'
-                  value={code}
+                  // value={code}
                   onChange={e => setCode(e.target.value)}
                   placeholder={t('login.codePlaceholder') || ''}
                   tabIndex={2}
@@ -270,7 +301,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 <Input
                   id='account'
                   className='border-grey input-resize'
-                  value={account}
+                  // value={account}
                   type="account"
                   autoComplete="account"
                   placeholder={t('login.accountPlaceholder') || ''}
@@ -284,7 +315,7 @@ export default function MailAndPasswordAuth({ isInvite, allowRegistration }: Mai
                 <Input
                   id='password'
                   className='border-grey input-resize'
-                  value={password}
+                  // value={password}
                   type="password"
                   autoComplete="password"
                   placeholder={t('login.passwordPlaceholder') || ''}

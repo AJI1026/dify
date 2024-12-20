@@ -667,6 +667,7 @@ button:focus-within {
 
 .tab_con {
   width: 360px;
+  height: 340px;
   margin: 0 auto;
   text-align: center;
 }
@@ -679,7 +680,7 @@ button:focus-within {
 }
 
 .tab_btns input {
-  width: 100px;
+  width: 70px;
   outline: none;
   background: transparent;
   position: relative;
@@ -688,18 +689,6 @@ button:focus-within {
   cursor: pointer;
   transition: background-color 0.3s;
   text-align: center;
-}
-
-.tab_btns input::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5px; /* 下划线与按钮的距离 */
-  height: 3px; /* 下划线的高度 */
-  background: linear-gradient(to right, red, blue); /* 渐变颜色 */
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
 }
 
 .tab_btns input.active {
@@ -730,10 +719,16 @@ button:focus-within {
   height: 576px !important;
 }
 
+/* 登录框左边 */
 .login-left {
   flex: 1;
   height: 500px;
   border-right: 1px solid #E4E7EF;
+}
+
+/* 登录框右边 */
+.login-right {
+  height: 500px;
 }
 
 /* 登录页的登录框大小 */
@@ -744,6 +739,30 @@ button:focus-within {
 
 .align-center {
   align-items: center;
+}
+
+/* 下划线 */
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient( 90deg, #276FFA 0%, rgba(39,111,250,0) 100%);
+  transform: scaleX(0); /* 初始状态缩放为0 */
+  opacity: 0; /* 初始透明度为0 */
+  animation: underlineAppear 0.3s forwards;
+}
+
+@keyframes underlineAppear {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
 }
 
 /* 协议链接颜色 */
@@ -765,6 +784,30 @@ button:focus-within {
   box-shadow: 0px 6px 14px 0px rgba(0,0,0,0.06);
   border-radius: 12px 12px 12px 12px;
   border: 1px solid #E4E7EF;
+}
+
+.mobile-input {
+  position: relative;
+}
+
+.mobile-input .suffix-select {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  z-index: 10;
+  background: transparent;
+  outline: none;
+}
+
+/* 分割线 */
+.suffix {
+  width: 1px;
+  height: 50px;
+  position: absolute;
+  left: 70px;
+  top: 0;
+  background: #D9D9D9;
+  z-index: 10;
 }
 
 @import '../components/base/button/index.css';

@@ -52,7 +52,7 @@ export default async function SignInLayout({ children }: any) {
             <div className='system-md-regular mt-6'>使用微信APP扫码登录</div>
           </div>
           {/* 登录页右边部分 */}
-          <div className='flex flex-col md:w-[400px]'>
+          <div className='login-right flex flex-col md:w-[400px]'>
             {children}
           </div>
         </div>

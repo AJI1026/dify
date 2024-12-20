@@ -89,7 +89,7 @@ const NormalForm = () => {
     <div className="flex flex-row items-center w-full grow justify-center">
 
       {/* 登录页右边部分 */}
-      <div className="w-full mx-auto mt-8">
+      <div className="w-full mx-auto">
         {isInviteLink
           ? <div className="w-full mx-auto">
             <h2 className="title-4xl-semi-bold text-text-primary">{t('login.join')}{workspaceName}</h2>
@@ -100,6 +100,7 @@ const NormalForm = () => {
             <div className={cn(
               style.title,
               'title-img',
+              'mb-5'
             )}/>
             {/* <p className='mt-2 body-md-regular text-text-tertiary'>{t('login.welcome')}</p> */}
           </div>}
